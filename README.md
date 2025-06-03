@@ -36,3 +36,6 @@ portafolio_crud/
 5. Acceder al sistema usando:
    - Usuario: admin
    - Contraseña: 123456
+     
+## IAs utilizadas:
+- ChatGPT: Se uilizó para dar ejemplos de bootstrap y estructurar las carpetas.
