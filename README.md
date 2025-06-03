@@ -5,14 +5,6 @@ Sistema de gestión de portafolio que permite crear, leer, actualizar y eliminar
 ## Descripción
 Este proyecto es un sistema CRUD (Create, Read, Update, Delete) para gestionar un portafolio de proyectos. Permite a los usuarios autenticados administrar sus proyectos, incluyendo imágenes, enlaces a GitHub y URLs de producción.
 
-## Tecnologías Utilizadas
-- PHP 7.4+
-- MySQL/MariaDB
-- Bootstrap 5.3.2
-- HTML5
-- CSS3
-- JavaScript
-
 ## Estructura del Proyecto
 ```
 portafolio_crud/
@@ -34,10 +26,7 @@ portafolio_crud/
 ```
 
 ## Requisitos Previos
-- Servidor web (Apache/Nginx)
-- PHP 7.4 o superior
-- MySQL/MariaDB
-- Servidor web configurado para permitir subida de archivos
+- Xampp
 
 ## Instalación
 1. Clonar el repositorio en tu servidor web
@@ -47,10 +36,3 @@ portafolio_crud/
 5. Acceder al sistema usando:
    - Usuario: admin
    - Contraseña: 123456
-
-## Características
-- Autenticación de usuarios
-- Gestión completa de proyectos (CRUD)
-- Subida de imágenes
-- Interfaz responsiva con Bootstrap
-- Validación de formularios
