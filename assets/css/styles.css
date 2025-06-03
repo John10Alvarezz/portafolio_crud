@@ -1,0 +1,19 @@
+/* Estilos personalizados */
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.project-card {
+    transition: transform 0.2s;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
