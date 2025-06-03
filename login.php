@@ -1,21 +1,29 @@
 <?php
-session_start(); // Inicio de sesión
-include 'db.php';  // Conexión a la base de datos
+/**
+ * Página de inicio de sesión
+ * 
+ * Maneja la autenticación de usuarios mediante un formulario.
+ * Verifica las credenciales contra la base de datos y establece la sesión.
+ */
+
+session_start();
+include 'db.php';
 
 // Procesamiento del formulario de login
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $username = $_POST['username'];
-  $password = md5($_POST['password']); // Encriptación de la contraseña
+    $username = $_POST['username'];
+    $password = md5($_POST['password']); // Encriptación de la contraseña
 
-  $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";
-  $result = $conn->query($sql);
+    // Consulta para verificar las credenciales
+    $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+    $result = $conn->query($sql);
 
-  if ($result->num_rows === 1) {
-    $_SESSION['user'] = $username;
-    header("Location: index.php");
-  } else {
-    $error = "Credenciales incorrectas.";
-  }
+    if ($result->num_rows === 1) {
+        $_SESSION['user'] = $username;
+        header("Location: index.php");
+    } else {
+        $error = "Credenciales incorrectas.";
+    }
 }
 ?>
 

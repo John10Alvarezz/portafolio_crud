@@ -1,6 +1,15 @@
 <?php
+/**
+ * Página principal del portafolio
+ * 
+ * Muestra todos los proyectos en un grid responsivo.
+ * Incluye opciones para agregar, editar y eliminar proyectos.
+ */
+
 include 'auth.php'; // Verificación de autenticación
 include 'db.php';   // Conexión a la base de datos
+
+// Obtener todos los proyectos ordenados por fecha de creación
 $result = $conn->query("SELECT * FROM proyectos ORDER BY created_at DESC");
 ?>
 
@@ -16,7 +25,9 @@ $result = $conn->query("SELECT * FROM proyectos ORDER BY created_at DESC");
 </head>
 
 <body class="bg-light">
+    <!-- Contenedor principal -->
     <div class="container py-4">
+        <!-- Barra de navegación superior -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
                 <a href="add.php" class="btn btn-primary">+ Agregar Proyecto</a>
@@ -26,6 +37,7 @@ $result = $conn->query("SELECT * FROM proyectos ORDER BY created_at DESC");
 
         <h2 class="mb-4">Proyectos</h2>
 
+        <!-- Grid de proyectos -->
         <div class="row">
             <?php while($row = $result->fetch_assoc()): ?>
             <div class="col-md-6 col-lg-4 mb-4">
@@ -34,12 +46,14 @@ $result = $conn->query("SELECT * FROM proyectos ORDER BY created_at DESC");
                     <div class="card-body">
                         <h3 class="card-title"><?= $row['titulo'] ?></h3>
                         <p class="card-text"><?= $row['descripcion'] ?></p>
+                        <!-- Enlaces del proyecto -->
                         <div class="d-flex gap-2 mb-3">
                             <a href="<?= $row['url_github'] ?>" class="btn btn-secondary btn-sm"
                                 target="_blank">GitHub</a>
                             <a href="<?= $row['url_produccion'] ?>" class="btn btn-info btn-sm" target="_blank">Ver
                                 Proyecto</a>
                         </div>
+                        <!-- Botones de acción -->
                         <div class="d-flex gap-2">
                             <a href="edit.php?id=<?= $row['id'] ?>" class="btn btn-warning btn-sm">Editar</a>
                             <a href="delete.php?id=<?= $row['id'] ?>" class="btn btn-danger btn-sm"

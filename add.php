@@ -1,25 +1,33 @@
 <?php
+/**
+ * Página para agregar nuevos proyectos
+ * 
+ * Permite crear nuevos proyectos con título, descripción,
+ * URLs y una imagen. Incluye manejo de subida de archivos.
+ */
+
 include 'auth.php'; // Verificación de autenticación
 include 'db.php';   // Conexión a la base de datos
 
 // Procesamiento del formulario de agregar proyecto
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $titulo = $_POST['titulo'];
-  $descripcion = $_POST['descripcion'];
-  $url_github = $_POST['url_github'];
-  $url_produccion = $_POST['url_produccion'];
+    // Obtener datos del formulario
+    $titulo = $_POST['titulo'];
+    $descripcion = $_POST['descripcion'];
+    $url_github = $_POST['url_github'];
+    $url_produccion = $_POST['url_produccion'];
 
-  // Manejo de la imagen
-  $imagen = $_FILES['imagen']['name'];
-  $tmp = $_FILES['imagen']['tmp_name'];
-  move_uploaded_file($tmp, "uploads/$imagen");
+    // Manejo de la imagen
+    $imagen = $_FILES['imagen']['name'];
+    $tmp = $_FILES['imagen']['tmp_name'];
+    move_uploaded_file($tmp, "uploads/$imagen");
 
-  // Inserción en la base de datos
-  $sql = "INSERT INTO proyectos (titulo, descripcion, url_github, url_produccion, imagen) 
-          VALUES ('$titulo', '$descripcion', '$url_github', '$url_produccion', '$imagen')";
+    // Inserción en la base de datos
+    $sql = "INSERT INTO proyectos (titulo, descripcion, url_github, url_produccion, imagen) 
+            VALUES ('$titulo', '$descripcion', '$url_github', '$url_produccion', '$imagen')";
 
-  $conn->query($sql);
-  header("Location: index.php");
+    $conn->query($sql);
+    header("Location: index.php");
 }
 ?>
 

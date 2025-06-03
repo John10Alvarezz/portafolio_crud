@@ -1,4 +1,11 @@
 <?php
+/**
+ * Página de edición de proyectos
+ * 
+ * Permite modificar los datos de un proyecto existente,
+ * incluyendo la actualización opcional de la imagen.
+ */
+
 include 'auth.php'; // Verificación de autenticación
 include 'db.php';   // Conexión a la base de datos
 
@@ -7,25 +14,26 @@ $proyecto = $conn->query("SELECT * FROM proyectos WHERE id=$id")->fetch_assoc();
 
 // Procesamiento del formulario de edición
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $titulo = $_POST['titulo'];
-  $descripcion = $_POST['descripcion'];
-  $url_github = $_POST['url_github'];
-  $url_produccion = $_POST['url_produccion'];
+    // Obtener datos del formulario
+    $titulo = $_POST['titulo'];
+    $descripcion = $_POST['descripcion'];
+    $url_github = $_POST['url_github'];
+    $url_produccion = $_POST['url_produccion'];
 
-  // Manejo de la imagen si se sube una nueva
-  if ($_FILES['imagen']['name']) {
-    $imagen = $_FILES['imagen']['name'];
-    move_uploaded_file($_FILES['imagen']['tmp_name'], "uploads/$imagen");
-    $img_sql = ", imagen='$imagen'";
-  } else {
-    $img_sql = "";
-  }
+    // Manejo de la imagen si se sube una nueva
+    if ($_FILES['imagen']['name']) {
+        $imagen = $_FILES['imagen']['name'];
+        move_uploaded_file($_FILES['imagen']['tmp_name'], "uploads/$imagen");
+        $img_sql = ", imagen='$imagen'";
+    } else {
+        $img_sql = "";
+    }
 
-  // Actualización en la base de datos
-  $sql = "UPDATE proyectos SET titulo='$titulo', descripcion='$descripcion', 
-          url_github='$url_github', url_produccion='$url_produccion' $img_sql WHERE id=$id";
-  $conn->query($sql);
-  header("Location: index.php");
+    // Actualización en la base de datos
+    $sql = "UPDATE proyectos SET titulo='$titulo', descripcion='$descripcion', 
+            url_github='$url_github', url_produccion='$url_produccion' $img_sql WHERE id=$id";
+    $conn->query($sql);
+    header("Location: index.php");
 }
 ?>
 
